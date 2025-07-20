@@ -1,4 +1,5 @@
 import { StringCalculator } from "./stringCalculator";
+import { EMPTY_STRING, ERROR_NEGATIVE_NUMBERS } from "./constants";
 
 describe("StringCalculator", () => {
   let calculator: StringCalculator;
@@ -8,7 +9,7 @@ describe("StringCalculator", () => {
   });
 
   it("should return 0 for empty string", () => {
-    expect(calculator.add("")).toBe(0);
+    expect(calculator.add(EMPTY_STRING)).toBe(0);
   });
 
   it("should return the number itself for single number", () => {
@@ -33,11 +34,13 @@ describe("StringCalculator", () => {
 
   it("should throw exception for negative numbers", () => {
     expect(() => calculator.add("1,-2,3")).toThrow(
-      "negative numbers not allowed -2"
+      `${ERROR_NEGATIVE_NUMBERS} -2`
     );
   });
 
-  it('should show all negative numbers in exception message', () => {
-    expect(() => calculator.add('1,-2,3,-4')).toThrow('negative numbers not allowed -2,-4');
+  it("should show all negative numbers in exception message", () => {
+    expect(() => calculator.add("1,-2,3,-4")).toThrow(
+      `${ERROR_NEGATIVE_NUMBERS} -2,-4`
+    );
   });
 });
